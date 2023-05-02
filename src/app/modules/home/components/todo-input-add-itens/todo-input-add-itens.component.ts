@@ -10,9 +10,12 @@ export class TodoInputAddItensComponent {
   public addItemTaskList: string = "";
 
   public submitItemTaskList(){
+
+    if (this.addItemTaskList){
     // emit o valor para fora do component
     this.emitItemTaskList.emit(this.addItemTaskList);
     this.addItemTaskList = "";
+    }
   }
 
 }
