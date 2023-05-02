@@ -14,6 +14,7 @@ export class TodoListComponent implements  DoCheck{
   ngDoCheck() {
     // valores nao checked vai para cima e valores checked para baixo
     this.taskList.sort((first, last)=> Number(first.checked) - Number(last.checked))
+    localStorage.setItem("list",JSON.stringify(this.taskList));
   }
 
   public setEmitItemTaskList(event: string) {
