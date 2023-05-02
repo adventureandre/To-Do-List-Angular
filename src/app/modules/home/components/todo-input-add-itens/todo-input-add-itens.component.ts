@@ -11,6 +11,8 @@ export class TodoInputAddItensComponent {
 
   public submitItemTaskList(){
 
+    this.addItemTaskList = this.addItemTaskList.trim();
+
     if (this.addItemTaskList){
     // emit o valor para fora do component
     this.emitItemTaskList.emit(this.addItemTaskList);
