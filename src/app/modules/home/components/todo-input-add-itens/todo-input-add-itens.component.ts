@@ -6,6 +6,7 @@ import {Component, EventEmitter, Output} from '@angular/core';
   styleUrls: ['./todo-input-add-itens.component.scss']
 })
 export class TodoInputAddItensComponent {
+  // envia  o emitItemTaskList para fora  tipo evento para recupera o valor
   @Output() public emitItemTaskList = new EventEmitter();
   public addItemTaskList: string = "";
 
