@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 
 @Component({
   selector: 'app-todo-input-add-itens',
@@ -6,5 +6,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./todo-input-add-itens.component.scss']
 })
 export class TodoInputAddItensComponent {
+  @Output() public emitItemTaskList = new EventEmitter();
+  public addItemTaskList: string = "";
+
+  public submitItemTaskList(){
+    // emit o valor para fora do component
+    this.emitItemTaskList.emit(this.addItemTaskList);
+    this.addItemTaskList = "";
+  }
 
 }
