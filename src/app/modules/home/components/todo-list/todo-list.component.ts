@@ -1,6 +1,7 @@
 import {Component, DoCheck} from '@angular/core';
 //Interface
 import {TaskList} from "../../model/task-list";
+import {empty} from "rxjs";
 
 @Component({
   selector: 'app-todo-list',
@@ -8,14 +9,13 @@ import {TaskList} from "../../model/task-list";
   styleUrls: ['./todo-list.component.scss']
 })
 
-export class TodoListComponent implements  DoCheck{
-  public taskList: Array<TaskList> = [];
+export class TodoListComponent implements DoCheck {
+
+  public taskList: Array<TaskList> = JSON.parse(localStorage.getItem("list") || '[]');
 
   //Este evento escuta o elemento esperendo alguma acão quando acontecer ele da o sort na lista
   ngDoCheck() {
-    // valores nao checked vai para cima e valores checked para baixo
-    this.taskList.sort((first, last)=> Number(first.checked) - Number(last.checked))
-    localStorage.setItem("list",JSON.stringify(this.taskList));
+    this.setLocalStorage();
   }
 
   public setEmitItemTaskList(event: string) {
@@ -33,12 +33,20 @@ export class TodoListComponent implements  DoCheck{
     }
   }
 
-  public validationInput(event:string, index: number){
-    if(!event.length){
-      const confirm =  window.confirm('Task está vazia, deseja Deletar?')
-      if (confirm){
+  public validationInput(event: string, index: number) {
+    if (!event.length) {
+      const confirm = window.confirm('Task está vazia, deseja Deletar?')
+      if (confirm) {
         this.deleteItemTaskList(index);
       }
+    }
+  }
+
+  public setLocalStorage() {
+    if (this.taskList) {
+      // valores nao checked vai para cima e valores checked para baixo
+      this.taskList.sort((first, last) => Number(first.checked) - Number(last.checked))
+      localStorage.setItem("list", JSON.stringify(this.taskList));
     }
   }
 }
